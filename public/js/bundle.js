@@ -1,0 +1,1 @@
+(()=>{"use strict";const t=new class{constructor(){this.templateElement=document.getElementById("project-input"),this.rootElement=document.getElementById("app");const t=document.importNode(this.templateElement.content,!0);this.formElement=t.firstElementChild,this.attach()}attach(){this.rootElement.insertAdjacentElement("afterbegin",this.formElement)}};console.log(t)})();
