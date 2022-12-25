@@ -1,3 +1,5 @@
+import { autobind } from './decorators';
+
 export default class ProjectInput {
   templateElement: HTMLTemplateElement;
   rootElement: HTMLDivElement;
@@ -33,13 +35,14 @@ export default class ProjectInput {
     this.attach();
   }
 
+  @autobind
   private submitHandler(event: Event) {
     event.preventDefault();
     console.log(this.titleInputElement.value);
   }
 
   private configure() {
-    this.formElement.addEventListener('submit', this.submitHandler.bind(this));
+    this.formElement.addEventListener('submit', this.submitHandler);
   }
 
   private attach() {
