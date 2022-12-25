@@ -1,4 +1,6 @@
 import { autobind } from './decorators';
+import { validate } from './helpers';
+import { Validatable } from './interfaces';
 
 export default class ProjectInput {
   templateElement: HTMLTemplateElement;
@@ -40,10 +42,31 @@ export default class ProjectInput {
     const description = this.descriptionInputElement.value;
     const people = this.peopleInputElement.value;
 
-    const isEmpty = (value: string) => value.trim().length === 0;
+    const titleValidatable: Validatable = {
+      value: title,
+      required: true,
+    };
+    const descriptionValidatable: Validatable = {
+      value: description,
+      required: true,
+      minLength: 5,
+    };
+    const peopleValidatable: Validatable = {
+      value: +people,
+      required: true,
+      min: 1,
+      max: 5,
+    };
 
-    if (isEmpty(title) || isEmpty(description) || isEmpty(people)) {
-      return alert("Inputs can't be empty.");
+    if (
+      !validate(titleValidatable) ||
+      !validate(descriptionValidatable) ||
+      !validate(peopleValidatable)
+    ) {
+      alert(
+        'All inputs are required. Description should be at least 5 characters long. Provide a number from 1 to 5 for people field.'
+      );
+      return;
     } else {
       return [title, description, +people];
     }
