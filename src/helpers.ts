@@ -1,4 +1,4 @@
-import { Validatable } from './interfaces';
+import { Validatable } from './type-definitions';
 
 export function validate(validatableInput: Validatable) {
   let isValid = true;

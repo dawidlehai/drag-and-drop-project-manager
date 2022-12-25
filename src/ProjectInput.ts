@@ -1,11 +1,12 @@
 import { autobind } from './decorators';
 import { validate } from './helpers';
-import { Validatable } from './interfaces';
+import { Validatable } from './type-definitions';
+import projectState from './ProjectState';
 
 export default class ProjectInput {
   templateElement: HTMLTemplateElement;
-  rootElement: HTMLDivElement;
-  formElement: HTMLFormElement;
+  hostElement: HTMLDivElement;
+  element: HTMLFormElement;
   titleInputElement: HTMLInputElement;
   descriptionInputElement: HTMLInputElement;
   peopleInputElement: HTMLInputElement;
@@ -14,22 +15,22 @@ export default class ProjectInput {
     this.templateElement = document.getElementById(
       'project-input'
     )! as HTMLTemplateElement;
-    this.rootElement = document.getElementById('app')! as HTMLDivElement;
+    this.hostElement = document.getElementById('app')! as HTMLDivElement;
 
     const importedNode = document.importNode(
       this.templateElement.content,
       true
     );
-    this.formElement = importedNode.firstElementChild as HTMLFormElement;
-    this.formElement.id = 'user-input';
+    this.element = importedNode.firstElementChild as HTMLFormElement;
+    this.element.id = 'user-input';
 
-    this.titleInputElement = this.formElement.querySelector(
+    this.titleInputElement = this.element.querySelector(
       '#title'
     ) as HTMLInputElement;
-    this.descriptionInputElement = this.formElement.querySelector(
+    this.descriptionInputElement = this.element.querySelector(
       '#description'
     ) as HTMLInputElement;
-    this.peopleInputElement = this.formElement.querySelector(
+    this.peopleInputElement = this.element.querySelector(
       '#people'
     ) as HTMLInputElement;
 
@@ -38,21 +39,21 @@ export default class ProjectInput {
   }
 
   private gatherUserInput(): [string, string, number] | void {
-    const title = this.titleInputElement.value;
-    const description = this.descriptionInputElement.value;
-    const people = this.peopleInputElement.value;
+    const enteredTitle = this.titleInputElement.value;
+    const enteredDescription = this.descriptionInputElement.value;
+    const enteredPeople = this.peopleInputElement.value;
 
     const titleValidatable: Validatable = {
-      value: title,
+      value: enteredTitle,
       required: true,
     };
     const descriptionValidatable: Validatable = {
-      value: description,
+      value: enteredDescription,
       required: true,
       minLength: 5,
     };
     const peopleValidatable: Validatable = {
-      value: +people,
+      value: +enteredPeople,
       required: true,
       min: 1,
       max: 5,
@@ -63,12 +64,10 @@ export default class ProjectInput {
       !validate(descriptionValidatable) ||
       !validate(peopleValidatable)
     ) {
-      alert(
-        'All inputs are required. Description should be at least 5 characters long. Provide a number from 1 to 5 for people field.'
-      );
+      alert('Invalid input, please try again!');
       return;
     } else {
-      return [title, description, +people];
+      return [enteredTitle, enteredDescription, +enteredPeople];
     }
   }
 
@@ -84,16 +83,16 @@ export default class ProjectInput {
     const userInput = this.gatherUserInput();
     if (Array.isArray(userInput)) {
       const [title, desc, people] = userInput;
-      console.log(title, desc, people);
+      projectState.addProject(title, desc, people);
       this.clearInputs();
     }
   }
 
   private configure() {
-    this.formElement.addEventListener('submit', this.submitHandler);
+    this.element.addEventListener('submit', this.submitHandler);
   }
 
   private attach() {
-    this.rootElement.insertAdjacentElement('afterbegin', this.formElement);
+    this.hostElement.insertAdjacentElement('afterbegin', this.element);
   }
 }
