@@ -22,4 +22,4 @@ export class Project {
   ) {}
 }
 
-export type Listener = (items: Project[]) => void;
+export type Listener<T> = (items: T[]) => void;
