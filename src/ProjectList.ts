@@ -1,6 +1,7 @@
 import { Project, ProjectStatus } from './type-definitions';
 import projectState from './ProjectState';
 import Component from './Component';
+import ProjectItem from './ProjectItem';
 
 export default class ProjectList extends Component<
   HTMLDivElement,
@@ -22,9 +23,7 @@ export default class ProjectList extends Component<
     )! as HTMLUListElement;
     listEl.innerHTML = '';
     for (const prjItem of this.assignedProjects) {
-      const listItem = document.createElement('li');
-      listItem.textContent = prjItem.title;
-      listEl.appendChild(listItem);
+      new ProjectItem(this.element.id, prjItem);
     }
   }
 
