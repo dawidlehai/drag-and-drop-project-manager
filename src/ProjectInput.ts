@@ -46,13 +46,13 @@ export default class ProjectInput extends Component<
     const descriptionValidatable: Validatable = {
       value: enteredDescription,
       required: true,
-      minLength: 5,
+      minLength: 1,
     };
     const peopleValidatable: Validatable = {
       value: +enteredPeople,
       required: true,
       min: 1,
-      max: 5,
+      max: 20,
     };
 
     if (
@@ -60,7 +60,9 @@ export default class ProjectInput extends Component<
       !validate(descriptionValidatable) ||
       !validate(peopleValidatable)
     ) {
-      alert('Invalid input, please try again!');
+      alert(
+        'All inputs are required. You should enter between 1 and 20 people.'
+      );
       return;
     } else {
       return [enteredTitle, enteredDescription, +enteredPeople];
