@@ -1,9 +1,19 @@
-# TS Project Manager
+# ⌨️ TypeScript Project Manager
 
 **Drag and drop project manager made with TypeScript.**
 
+## 💻 Screenshot
+[<img src="ts-project-manager-screenshot.webp" alt="Screenshot of the TypeScript Project Manager app" width="300px">](https://dawidlehai-ts-project-manager.netlify.app/ 'Live preview')
+
+## 🛠️ Tools and technologies
+`TypeScript` `HTML` `CSS` `webpack` `VS Code`
+
+## 🌐 Deployment
+Deployed on `Netlify`.
+
 Live preview at [dawidlehai-ts-project-manager.netlify.app](https://dawidlehai-ts-project-manager.netlify.app/).
 
-This project was created as a part of the [Udemy](https://www.udemy.com/ 'Udemy') course _Understanding TypeScript - 2023 Edition_ by [Maximilian Schwarzmüller](https://twitter.com/maxedapps 'Maximilian Schwarzmüller on Twitter').
+## 🎓 Related course
+This project was created as a part of the [Udemy](https://www.udemy.com/ 'Udemy') course [_Understanding TypeScript - 2023 Edition_](https://www.udemy.com/course/understanding-typescript/ 'See this course on Udemy') by [Maximilian Schwarzmüller](https://twitter.com/maxedapps 'Maximilian Schwarzmüller on Twitter').
 
-By preparing this project I learned basics about TypeScript.
+By preparing this project I learned a lot of stuff about **TypeScript**.
